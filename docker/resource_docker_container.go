@@ -59,8 +59,11 @@ func resourceDockerContainerCreate(d *schema.ResourceData, m interface{}) error 
 	cli := m.(*client.Client)
 	ctx := context.Background()
 	// Parse and extract resource attributes from d.
-	imageName := d.Get("image_name").(string)
-	containerName := d.Get("container_name").(string)
+	imageName := d.Get("image").(string)
+	fmt.Printf("🚀 ~  imageName: %s", imageName)
+	containerName := d.Get("name").(string)
+	fmt.Printf("🚀 ~  containerName: %s", containerName)
+
 	internalPort := d.Get("ports.0.internal").(int)
 	externalPort := d.Get("ports.0.external").(int)
 

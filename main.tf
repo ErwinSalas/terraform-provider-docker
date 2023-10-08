@@ -1,17 +1,15 @@
 terraform {
   required_providers {
     docker = {
-      source  = "opentofu-docker"
-      version = "1.0.0"
+      source = "ErwinSalas/docker"
+      version = "1.0.1"
     }
-
   }
 }
 
 
 provider "docker" {
-  alias = "mydocker"
-  host = "unix:///var/run/docker.sock"
+  docker_host = "unix:///var/run/docker.sock"
 }
 
 resource "docker_container" "example" {
