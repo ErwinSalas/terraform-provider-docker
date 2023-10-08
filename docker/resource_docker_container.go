@@ -20,8 +20,37 @@ func resourceDockerContainer() *schema.Resource {
 		Update: resourceDockerContainerUpdate,
 		Delete: resourceDockerContainerDelete,
 		Schema: map[string]*schema.Schema{
-			// Define schema attributes for your Docker container resource.
-			// For example, image name, exposed ports, etc.
+			"name": {
+				Type:        schema.TypeString,
+				Required:    true,
+				ForceNew:    true,
+				Description: "The name of the Docker container.",
+			},
+			"image": {
+				Type:        schema.TypeString,
+				Required:    true,
+				Description: "The Docker image name and tag (e.g., nginx:latest).",
+			},
+			"ports": {
+				Type: schema.TypeList,
+				Elem: &schema.Resource{
+					Schema: map[string]*schema.Schema{
+						"internal": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The internal port inside the container.",
+						},
+						"external": {
+							Type:        schema.TypeInt,
+							Required:    true,
+							Description: "The external port on the host.",
+						},
+					},
+				},
+				Required:    true,
+				Description: "Port mappings from container to host.",
+			},
+			// Add more schema attributes as needed for your Docker container configuration.
 		},
 	}
 }
